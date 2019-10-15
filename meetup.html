@@ -68,17 +68,23 @@
         }
         ///////////////////////////////////////////////////////////////////////////////////
 
+        var selLocLatA = 0.0;
+        var selLocLatB = 0.0;
+        var selLocLngA = 0.0;
+        var selLocLngB = 0.0;
+
         function renderMap() {
             // Get the user defined values
             var addressA = document.getElementById('addressA').value;
-            //console.log("getting address A");
+            console.log("getting address A: ", addressA);
 
             /////
             var addressB = document.getElementById('addressB').value;
-            //console.log("getting address B");
+            console.log("getting address B: ", addressB);
             /////
 
             var radius = parseInt(document.getElementById('radius').value) * 1000;
+            console.log("radius: ", radius);
             // get the selected type
             selectedTypes = [];
             //console.log("getting address c");
@@ -86,14 +92,18 @@
             $('.types').each(function () {
                 if ($(this).is(':checked')) {
                     selectedTypes.push($(this).val());
+                    console.log("checked: ", $(this).val());
                 }
             });
             
             var geocoder = new google.maps.Geocoder();
+            console.log("geocoder: ", geocoder);
 
             geocoder.geocode({
                 'address': addressA
             }, function (results, status) {
+                console.log("results: ", results);
+                console.log("status: ", status);
                 if (status === 'OK') {
                     //console.log(results[0].geometry.location.lat() + ' - ' + results[0].geometry.location.lng());
 
@@ -228,7 +238,7 @@
     </div>
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCLuLHKGw8PztomZfoeyiv19WmUdMUhCQ&libraries=places&callback=initialize"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCLuLHKGw8PztomZfoeyiv19WmUdMUhCQ&libraries=places&callback=initMap"
         async defer></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </body>
